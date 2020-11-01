@@ -1,0 +1,25 @@
+[comment encoding = UTF-8 /]
+[module generateREADMEmd('http://www.example.org/diagramaClasesCompleto')]
+
+
+[template public generateREADMEmd(raiz : DiagramaClases)]
+[file (raiz.artefacto_contenido.nombre+'/README.md', false, 'UTF-8')]
+[for (i: Artefacto | raiz.artefacto_contenido)]
+# [i.nombre/]
+
+## Description
+Project generated with Acceleo
+
+## Prerequisites
+JDK [raiz.configuracionlenguaje.version/]
+Maven
+Lombok
+
+## Run the App
+```bash
+$ cd [raiz.artefacto_contenido.nombre/]
+$ mvn spring-boot:run
+```
+[/for]
+[/file]
+[/template]

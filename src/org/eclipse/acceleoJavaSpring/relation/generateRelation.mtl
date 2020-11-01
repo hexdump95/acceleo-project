@@ -1,0 +1,36 @@
+[comment encoding = UTF-8 /]
+[module generateRelation('http://www.example.org/diagramaClasesCompleto')]
+
+
+[template public generateRelation(raiz : Clase)]
+[for (i: Relacion | raiz.relaciones_contenidas)]
+[if (i.tipo.toString() = 'unidireccional')]
+	[if (i.multiplicidad.toString() = 'oneToOne')]
+    @[i.multiplicidad.toString().toUpperFirst()/](cascade = CascadeType.ALL)
+    @JoinColumn(name = "[i.destino.nombre.toLowerFirst()/]_id")
+    [i.visibilidad/] [i.destino.nombre/] [i.nombre/];
+	[/if]
+	[if (i.multiplicidad.toString() = 'oneToMany')]
+    @[i.multiplicidad.toString().toUpperFirst()/]()
+    [i.visibilidad/] List<[i.destino.nombre/]> [i.nombre/] = new ArrayList<[i.destino.nombre.toLowerFirst()/]>();
+	[/if]
+    [if (i.multiplicidad.toString() = 'manyToOne')]
+    @[i.multiplicidad.toString().toUpperFirst()/](optional = false)
+    @JoinColumn(name = "[i.destino.nombre.toLowerFirst()/]_id")
+    [i.visibilidad/] [i.destino.nombre/] [i.nombre/];
+	[/if]
+	[if (i.multiplicidad.toString() = 'manyToMany')]
+    @[i.multiplicidad.toString().toUpperFirst()/](cascade = CascadeType.REFRESH)
+    @JoinTable(name = "[i.origen.nombre.toLowerFirst()/]_[i.destino.nombre.toLowerFirst()/]")
+    [i.visibilidad/] List<[i.destino.nombre/]> [i.nombre/];
+	[/if]
+[/if][if (i.tipo.toString() = 'composicion')]
+    @[i.multiplicidad.toString().toUpperFirst()/](cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinTable(name = "[i.origen.nombre.toLowerFirst()/]_[i.destino.nombre.toLowerFirst()/]", 
+    joinColumns = @JoinColumn(name = "[i.origen.nombre.toLowerFirst()/]_id"), 
+    inverseJoinColumns = @JoinColumn(name = "[i.destino.nombre.toLowerFirst()/]_id"))
+    [i.visibilidad/] List<[i.destino.nombre/]> [i.nombre/] = new ArrayList<[i.destino.nombre/]>();
+[/if]
+
+[/for]
+[/template]

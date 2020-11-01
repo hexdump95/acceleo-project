@@ -1,0 +1,44 @@
+[comment encoding = UTF-8 /]
+[module generateEntity('http://www.example.org/diagramaClasesCompleto')]
+
+[import org::eclipse::acceleoJavaSpring::attributes::generateAttributes/]
+[import org::eclipse::acceleoJavaSpring::relation::generateRelation/]
+
+[template public generateEntity(raiz : DiagramaClases)]
+
+[for (i: Clase | raiz.packages_contenidos.clasificadores_contenidos->filter(Clase))]
+[file (raiz.artefacto_contenido.nombre+'/src/main/java/'+raiz.artefacto_contenido.grupoId.replaceAll('\\.','/')+'/'+raiz.artefacto_contenido.artefactotId+'/entities/'+i.nombre+'.java', false, 'UTF-8')]
+package [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/].entities;
+
+[if (i.esAuditable=true)]import org.hibernate.envers.Audited;[/if]
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Date;
+
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.Data;
+
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.CascadeType;
+import javax.persistence.JoinTable;
+
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+[if (i.esAuditable=true)]@Audited[/if]
+public class [i.nombre/] extends BaseEntity {
+[generateAttributes(i)/]
+[generateRelation(i)/]
+}
+[/file]
+[/for]
+[/template]

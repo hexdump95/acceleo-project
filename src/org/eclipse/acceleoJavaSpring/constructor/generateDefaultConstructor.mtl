@@ -1,0 +1,9 @@
+[comment encoding = UTF-8 /]
+[module generateDefaultConstructor('http://www.example.org/diagramaClasesCompleto')]
+
+
+[template public generateDefaultConstructor(raiz : DiagramaClases)]
+[for (i: Clase | raiz.packages_contenidos.clasificadores_contenidos->filter(Clase))]
+	public [i.nombre/](){ }
+[/for]
+[/template]

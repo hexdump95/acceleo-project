@@ -1,0 +1,41 @@
+[comment encoding = UTF-8 /]
+[module relation('http://www.example.org/diagramaClasesCompleto')]
+
+[import string /]
+[import general /]
+
+[query public esUni(r : Relacion) : Boolean = r.oclIsTypeOf(UniDireccional)/]
+
+[query public esBi(r : Relacion) : Boolean = r.oclIsTypeOf(BiDireccional)/]
+
+[query public tipoUni(r : Relacion, s : String) : Boolean = r.oclAsType(UniDireccional).relacionesUnidireccionales.toString() = s/]
+
+[query public tipoBi(r : Relacion, s : String) : Boolean = r.oclAsType(BiDireccional).relacionesBidireccionales.toString() = s/]
+
+
+
+[query public esOwner(r : Relacion, c : Clase) : Boolean = r.owner.nombre.toString() = c.nombre /]
+
+[query public esOwned(r : Relacion, c : Clase) : Boolean = r.owned.nombre.toString()= c.nombre /]
+
+[comment poner clase /]
+
+[query public toOne(r : Relacion, c : Clasificador) : String = 
+r.visibilidad+' '+entityUF(c)+' '+entityLF(c)+';'/]
+
+[query public toMany(r : Relacion, c : Clasificador) : String = 
+r.visibilidad+' List<'+entityUF(c)+'> '+entityLF(c)+'s = new ArrayList<>();'/]
+
+
+[query public toOneDTO(r : Relacion, c : Clase) : String = 
+r.visibilidad+' '+dtoUF(c)+' '+entityLF(c)+';'/]
+
+[query public toManyDTO(r : Relacion, c : Clase) : String = 
+r.visibilidad+' List<'+dtoUF(c)+'> '+entityLF(c)+'s = new ArrayList<>();'/]
+
+[comment [query public ITieneRelaciones(dc: DiagramaClases, i : Interface) : Boolean = 
+	clases(dc)->forAll(c : Clase | c.relaciones_contenidas.owned.toString() = i.nombre.toString()) /]
+
+[query public ownedEsClase(r : Relacion) : Boolean = r.owned.oclIsTypeOf(Clase) /]
+
+[query public ownedEsInterface(r : Relacion) : Boolean = r.owned.oclIsTypeOf(Interface) /]

@@ -1,0 +1,20 @@
+[comment encoding = UTF-8 /]
+[module generateEntityService('http://www.example.org/diagramaClasesCompleto')]
+
+
+[template public generateEntityService(raiz : DiagramaClases)]
+
+[for (i: Clase | raiz.packages_contenidos.clasificadores_contenidos->filter(Clase))]
+[if (i.tieneABM=true)]
+[file (raiz.artefacto_contenido.nombre+'/src/main/java/'+raiz.artefacto_contenido.grupoId.replaceAll('\\.','/')+'/'+raiz.artefacto_contenido.artefactotId+'/services/'+i.nombre+'Service.java', false, 'UTF-8')]
+package [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/].services;
+
+import [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/].entities.[i.nombre/];
+
+public interface [i.nombre/]Service extends BaseService<[i.nombre/], Long> {    
+}
+
+[/file]
+[/if]
+[/for]
+[/template]

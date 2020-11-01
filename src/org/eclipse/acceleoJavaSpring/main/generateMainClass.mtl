@@ -1,0 +1,21 @@
+[comment encoding = UTF-8 /]
+[module generateMainClass('http://www.example.org/diagramaClasesCompleto')]
+
+
+[template public generateMainClass(raiz : DiagramaClases)]
+[file (raiz.artefacto_contenido.nombre+'/src/main/java/'+raiz.artefacto_contenido.grupoId.replaceAll('\\.','/')+'/'+raiz.artefacto_contenido.artefactotId+'/'+(raiz.artefacto_contenido.nombre)+'Application.java', false, 'UTF-8')]
+package com.example.demo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class [raiz.artefacto_contenido.nombre/]Application {
+
+	public static void main(String['['/][']'/] args) {
+		SpringApplication.run([raiz.artefacto_contenido.nombre/]Application.class, args);
+	}
+
+}
+[/file]
+[/template]

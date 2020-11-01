@@ -1,0 +1,34 @@
+[comment encoding = UTF-8 /]
+[module generateEntityServiceImpl('http://www.example.org/diagramaClasesCompleto')]
+
+
+[template public generateEntityServiceImpl(raiz : DiagramaClases)]
+
+[for (i: Clase | raiz.packages_contenidos.clasificadores_contenidos->filter(Clase))]
+[if (i.tieneABM=true)]
+[file (raiz.artefacto_contenido.nombre+'/src/main/java/'+raiz.artefacto_contenido.grupoId.replaceAll('\\.','/')+'/'+raiz.artefacto_contenido.artefactotId+'/services/'+i.nombre+'ServiceImpl.java', false, 'UTF-8')]
+package [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/].services;
+
+import [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/].entities.[i.nombre/];
+import [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/].repositories.BaseRepository;
+import [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/].repositories.[i.nombre/]Repository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class [i.nombre/]ServiceImpl extends BaseServiceImpl<[i.nombre/], Long> implements [i.nombre/]Service {
+
+    @Autowired
+    private [i.nombre/]Repository [i.nombre.toLower()/]Repository;
+
+    public [i.nombre/]ServiceImpl(BaseRepository<[i.nombre/], Long> baseRepository) {
+        super(baseRepository);
+    }
+
+}
+
+[/file]
+[/if]
+[/for]
+[/template]

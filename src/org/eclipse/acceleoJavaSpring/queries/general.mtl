@@ -1,0 +1,40 @@
+[comment encoding = UTF-8 /]
+[module general('http://www.example.org/diagramaClasesCompleto')]
+
+[comment devuelve un set con todas las clases del diagrama /]
+[query public clases(dc : DiagramaClases) : Set(Clase) = dc.packages_contenidos.clasificadores_contenidos->filter(Clase)/]
+
+[comment devuelve todas las clases excepto la que paso como parametro /]
+[query public otrasClases(c : Clase) : Set(Clase) = clases(c.eContainer(DiagramaClases)) - c->asSet() /]
+
+[comment devuelve un set con todas las interfaces del diagrama /]
+[query public interfaces(dc : DiagramaClases) : Set(Interface) = dc.packages_contenidos.clasificadores_contenidos->filter(Interface)/]
+
+[comment devuelve true si el clasificador hereda de otro  /]
+[query public esHijo(c : Clasificador) : Boolean = not c.herencias_contenidas.oclIsUndefined()/]
+
+[comment devuelve el padre del clasificador /]
+[query public padreHerencia(c : Clase) : Clase = c.herencias_contenidas.destino.oclAsType(Clase)/]
+
+[comment devuelve true si es padre aunque sea de un clasificador /]
+[query public esPadre(c : Clasificador) : Boolean = 
+	not c.eContainer(DiagramaClases).packages_contenidos.clasificadores_contenidos->forAll
+		(clasificador : Clasificador |  (not (clasificador.herencias_contenidas.destino_herencia.nombre.toString() = c.nombre.toString())))
+ /]
+
+[comment devuelve true si la clase tiene atributos /]
+[query public existenAtributos(c : Clase) : Boolean = c.atributos_contenidos->notEmpty() /]
+
+[comment devuelve true si la clase implementa aunque sea una interface /]
+[query public existeImplementacion(c : Clase) : Boolean = not c.realizaciones_contenidas->isEmpty()/]
+
+[comment devuelve true si tiene aunque sea una relacion /]
+[query public existeRelacion(c : Clase) : Boolean = not c.relaciones_contenidas->isEmpty()/]
+
+[comment devuelve true si hay aunque sea un metodo abstracto /]
+[query public metodosAbstractos(c : Clase) : Boolean = not c.operaciones_contenidas->forAll(o : Operacion | not o.esAbstracta) /]
+
+[comment devuelve true si es abstracto o tiene metodos abstractos /]
+[query public abstractOAbsMeth(c : Clase) : Boolean = c.esAbstracta or metodosAbstractos(c) /]
+
+[query public castClase(c : Clasificador) : Clase = c.oclAsType(Clase) /]

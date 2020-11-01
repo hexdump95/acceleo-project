@@ -1,0 +1,32 @@
+[comment encoding = UTF-8 /]
+[module generateBaseController('http://www.example.org/diagramaClasesCompleto')]
+
+[template public generateBaseController(raiz : DiagramaClases)]
+[file (raiz.artefacto_contenido.nombre+'/src/main/java/'+raiz.artefacto_contenido.grupoId.replaceAll('\\.','/')+'/'+raiz.artefacto_contenido.artefactotId+'/controllers/BaseController.java', false, 'UTF-8')]
+package [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/].controllers;
+
+import java.io.Serializable;
+
+import [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/].entities.BaseEntity;
+
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+
+public interface BaseController<E extends BaseEntity, ID extends Serializable> {
+    public ResponseEntity<?> getAll();
+
+    public ResponseEntity<?> getAll(Pageable pageable);
+
+    public ResponseEntity<?> getOne(@PathVariable ID id);
+
+    public ResponseEntity<?> save(@RequestBody E entity);
+
+    public ResponseEntity<?> update(@PathVariable ID id, @RequestBody E entity);
+
+    public ResponseEntity<?> delete(@PathVariable ID id);
+}
+
+[/file]
+[/template]

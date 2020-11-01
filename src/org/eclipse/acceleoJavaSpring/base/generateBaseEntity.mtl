@@ -1,0 +1,29 @@
+[comment encoding = UTF-8 /]
+[module generateBaseEntity('http://www.example.org/diagramaClasesCompleto')]
+
+
+[template public generateBaseEntity(raiz: DiagramaClases)]
+[file (raiz.artefacto_contenido.nombre+'/src/main/java/'+raiz.artefacto_contenido.grupoId.replaceAll('\\.','/')+'/'+raiz.artefacto_contenido.artefactotId+'/entities/BaseEntity.java', false, 'UTF-8')]
+package [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/].entities;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import lombok.Getter;
+import lombok.Setter;
+
+@MappedSuperclass
+
+@Getter
+@Setter
+
+public abstract class BaseEntity {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private Long id;
+}
+[/file]
+[/template]
