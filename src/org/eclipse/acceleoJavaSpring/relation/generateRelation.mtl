@@ -12,7 +12,7 @@
 	[/if]
 	[if (i.multiplicidad.toString() = 'oneToMany')]
     @[i.multiplicidad.toString().toUpperFirst()/]()
-    [i.visibilidad/] List<[i.destino.nombre/]> [i.nombre/] = new ArrayList<[i.destino.nombre.toLowerFirst()/]>();
+    [i.visibilidad/] List<[i.destino.nombre/]> [i.nombre/] = new ArrayList<[i.destino.nombre/]>();
 	[/if]
     [if (i.multiplicidad.toString() = 'manyToOne')]
     @[i.multiplicidad.toString().toUpperFirst()/](optional = false)
