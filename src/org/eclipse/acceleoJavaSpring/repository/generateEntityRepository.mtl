@@ -11,11 +11,10 @@ package [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactot
 
 import [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/].entities.[i.nombre/];
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface [i.nombre/]Repository extends JpaRepository<[i.nombre/], Long> {
+public interface [i.nombre/]Repository extends BaseRepository<[i.nombre/], Long> {
     
 }
 [/file]
