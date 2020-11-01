@@ -19,6 +19,8 @@
 [import org::eclipse::acceleoJavaSpring::service::generateEntityServiceImpl/]
 [import org::eclipse::acceleoJavaSpring::repository::generateEntityRepository/]
 
+[import org::eclipse::acceleoJavaSpring::docker::generateDockerfile/]
+
 [template public generateMain(raiz : DiagramaClases)]
 [comment @main/]
 [generatePOM(raiz)/]
@@ -39,6 +41,8 @@
 [generateEntityServiceImpl(raiz)/]
 [generateBaseRepository(raiz)/]
 [generateEntityRepository(raiz)/]
+
+[generateDockerfile(raiz)/]
 
 
 [/template]
