@@ -9,17 +9,11 @@
 [file (raiz.artefacto_contenido.nombre+'/src/main/java/'+raiz.artefacto_contenido.grupoId.replaceAll('\\.','/')+'/'+raiz.artefacto_contenido.artefactotId+'/controllers/'+i.nombre+'Controller.java', false, 'UTF-8')]
 package [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/].controllers;
 
-import [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/].controllers.BaseControllerImpl;
 import [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/].entities.[i.nombre/];
 import [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/].services.[i.nombre/]ServiceImpl;
 
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
