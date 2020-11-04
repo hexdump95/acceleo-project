@@ -4,16 +4,16 @@
 
 [template public generateMainClass(raiz : DiagramaClases)]
 [file (raiz.artefacto_contenido.nombre+'/src/main/java/'+raiz.artefacto_contenido.grupoId.replaceAll('\\.','/')+'/'+raiz.artefacto_contenido.artefactotId+'/'+(raiz.artefacto_contenido.nombre)+'Application.java', false, 'UTF-8')]
-package com.example.demo;
+package [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/];
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class [raiz.artefacto_contenido.nombre/]Application {
+public class [raiz.artefacto_contenido.nombre.toUpperFirst()/]Application {
 
 	public static void main(String['['/][']'/] args) {
-		SpringApplication.run([raiz.artefacto_contenido.nombre/]Application.class, args);
+		SpringApplication.run([raiz.artefacto_contenido.nombre.toUpperFirst()/]Application.class, args);
 	}
 
 }
