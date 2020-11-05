@@ -1,31 +1,43 @@
 [comment encoding = UTF-8 /]
 [module generateRelation('http://www.example.org/diagramaClasesCompleto')]
 
+[import org::eclipse::acceleoJavaSpring::queries::general/]
+[import org::eclipse::acceleoJavaSpring::entity::generateEntity/]
+[import org::eclipse::acceleoJavaSpring::relation::generateRelationSimple/]
 
-[template public generateRelation(raiz : Clase)]
-[for (i: Relacion | raiz.relaciones_contenidas)]
+[template public generateRelation(c : Clase)]
+[for (i: Relacion | c.relaciones_contenidas)]
+
+[if(i.destino.oclAsType(Clase).tieneABM=false)]
+[file (artifactDestino(i)+'/src/main/java/'+groupDestino(i).replaceAll('\\.','/')+'/'+artifactDestino(i)+'/entities/'+elDestino(i).nombre+'.java', false, 'UTF-8')]
+[generateEntity(elDestino(i))/]
+[generateRelationSimple(elDestino(i))/]
+}
+[/file]
+[/if]
+
 [if (i.tipo.toString() = 'unidireccional')]
 	[if (i.multiplicidad.toString() = 'oneToOne')]
-    @[i.multiplicidad.toString().toUpperFirst()/](cascade = CascadeType.ALL)
+    @[i.multiplicidad.toString().toUpperFirst()/]([if (i.tipoABM.toString()='simple')]cascade = CascadeType.ALL[/if])
     @JoinColumn(name = "[i.destino.nombre.toLowerFirst()/]_id")
     [i.visibilidad/] [i.destino.nombre/] [i.nombre/];
 	[/if]
 	[if (i.multiplicidad.toString() = 'oneToMany')]
-    @[i.multiplicidad.toString().toUpperFirst()/]()
+    @[i.multiplicidad.toString().toUpperFirst()/]([if (i.tipoABM.toString()='simple')]cascade = CascadeType.ALL[/if])
     [i.visibilidad/] List<[i.destino.nombre/]> [i.nombre/] = new ArrayList<[i.destino.nombre/]>();
 	[/if]
     [if (i.multiplicidad.toString() = 'manyToOne')]
-    @[i.multiplicidad.toString().toUpperFirst()/](optional = false)
+    @[i.multiplicidad.toString().toUpperFirst()/]([if (i.tipoABM.toString()='simple')]cascade = CascadeType.ALL[/if])
     @JoinColumn(name = "[i.destino.nombre.toLowerFirst()/]_id")
     [i.visibilidad/] [i.destino.nombre/] [i.nombre/];
 	[/if]
 	[if (i.multiplicidad.toString() = 'manyToMany')]
-    @[i.multiplicidad.toString().toUpperFirst()/](cascade = CascadeType.REFRESH)
+    @[i.multiplicidad.toString().toUpperFirst()/]([if (i.tipoABM.toString()='simple')]cascade = CascadeType.ALL[/if])
     @JoinTable(name = "[i.origen.nombre.toLowerFirst()/]_[i.destino.nombre.toLowerFirst()/]")
     [i.visibilidad/] List<[i.destino.nombre/]> [i.nombre/];
 	[/if]
 [/if][if (i.tipo.toString() = 'composicion')]
-    @[i.multiplicidad.toString().toUpperFirst()/](cascade = CascadeType.ALL, orphanRemoval = true)
+    @[i.multiplicidad.toString().toUpperFirst()/]([if (i.tipoABM.toString()='simple')]cascade = CascadeType.ALL,[/if] orphanRemoval = true)
     @JoinTable(name = "[i.origen.nombre.toLowerFirst()/]_[i.destino.nombre.toLowerFirst()/]", 
     joinColumns = @JoinColumn(name = "[i.origen.nombre.toLowerFirst()/]_id"), 
     inverseJoinColumns = @JoinColumn(name = "[i.destino.nombre.toLowerFirst()/]_id"))
