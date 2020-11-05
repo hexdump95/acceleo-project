@@ -4,7 +4,7 @@
 
 [template public generateAttributes(clase : Clase)]
     [for (i : Atributo | clase.atributos_contenidos)][if (i.esAuditable=true)]@Audited[/if]
-    @Column(name = "[if (i.pseudonimo.toString()='')][i.nombre/][else][i.pseudonimo/][/if]", unique = true)
+    @Column(name = "[if (i.pseudonimo.toString()=null)][i.pseudonimo/][else][i.nombre/][/if]", unique = true)
     [i.visibilidad/] [i.tipo/] [i.nombre/];
 	[/for]
 

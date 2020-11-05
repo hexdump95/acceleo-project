@@ -27,13 +27,13 @@ import javax.persistence.JoinTable;
 
 public class Autor extends BaseEntity {
 
-    @Column(name = "", unique = true)
+    @Column(name = "nombre", unique = true)
     private String nombre;
 
-    @Column(name = "", unique = true)
+    @Column(name = "apellido", unique = true)
     private String apellido;
 
-    @Column(name = "", unique = true)
+    @Column(name = "biografia", unique = true)
     private String biografia;
 
 

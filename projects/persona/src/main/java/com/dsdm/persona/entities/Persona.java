@@ -27,13 +27,13 @@ import javax.persistence.JoinTable;
 
 public class Persona extends BaseEntity {
 
-    @Column(name = "", unique = true)
+    @Column(name = "nombre", unique = true)
     private String nombre;
 
-    @Column(name = "", unique = true)
+    @Column(name = "apellido", unique = true)
     private String apellido;
 
-    @Column(name = "", unique = true)
+    @Column(name = "dni", unique = true)
     private int dni;
 
 

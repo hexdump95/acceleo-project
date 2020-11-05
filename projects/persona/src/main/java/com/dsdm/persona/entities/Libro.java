@@ -27,16 +27,16 @@ import javax.persistence.JoinTable;
 
 public class Libro extends BaseEntity {
 
-    @Column(name = "", unique = true)
+    @Column(name = "fecha", unique = true)
     private Date fecha;
 
-    @Column(name = "", unique = true)
+    @Column(name = "genero", unique = true)
     private String genero;
 
-    @Column(name = "", unique = true)
+    @Column(name = "paginas", unique = true)
     private int paginas;
 
-    @Column(name = "", unique = true)
+    @Column(name = "titulo", unique = true)
     private String titulo;
 
 
