@@ -1,20 +1,15 @@
 [comment encoding = UTF-8 /]
 [module generateEntityService('http://www.example.org/diagramaClasesCompleto')]
 
+[import org::eclipse::acceleoJavaSpring::queries::general/]
 
-[template public generateEntityService(raiz : DiagramaClases)]
+[template public generateEntityService(c : Clase)]
+[file (artifact(c)+'/src/main/java/'+group(c).replaceAll('\\.','/')+'/'+artifact(c)+'/services/'+c.nombre+'Service.java', false, 'UTF-8')]
+package [group(c)/].[artifact(c)/].services;
 
-[for (i: Clase | raiz.packages_contenidos.clasificadores_contenidos->filter(Clase))]
-[if (i.tieneABM=true)]
-[file (raiz.artefacto_contenido.nombre+'/src/main/java/'+raiz.artefacto_contenido.grupoId.replaceAll('\\.','/')+'/'+raiz.artefacto_contenido.artefactotId+'/services/'+i.nombre+'Service.java', false, 'UTF-8')]
-package [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/].services;
+import [group(c)/].[artifact(c)/].entities.[c.nombre/];
 
-import [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/].entities.[i.nombre/];
-
-public interface [i.nombre/]Service extends BaseService<[i.nombre/], Long> {    
+public interface [c.nombre/]Service extends BaseService<[c.nombre/], Long> {    
 }
-
 [/file]
-[/if]
-[/for]
 [/template]

@@ -4,7 +4,7 @@
 
 [template public generateAppProperties(raiz : DiagramaClases)]
 
-[file (raiz.artefacto_contenido.nombre+'/src/main/resources/application.properties', false, 'UTF-8')]
+[file (raiz.artefacto_contenido.artefactotId+'/src/main/resources/application.properties', false, 'UTF-8')]
 spring.datasource.url=jdbc:[raiz.configuraciondb.tipoProveedor.toString().toLower()/]://[raiz.configuraciondb.ip/]:[raiz.configuraciondb.dbPuerto/]/[raiz.configuraciondb.dbNombre/]?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
 spring.datasource.username=[raiz.configuraciondb.dbUsuario/]
 spring.datasource.password=[raiz.configuraciondb.dbContrasena/]

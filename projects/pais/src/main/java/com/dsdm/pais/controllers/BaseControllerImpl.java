@@ -1,13 +1,7 @@
-[comment encoding = UTF-8 /]
-[module generateBaseControllerImpl('http://www.example.org/proyectoDiagramaClases', 'http://www.example.org/diagramaClasesCompleto')]
+package com.dsdm.pais.controllers;
 
-
-[template public generateBaseControllerImpl(raiz : DiagramaClases)]
-[file (raiz.artefacto_contenido.artefactotId+'/src/main/java/'+raiz.artefacto_contenido.grupoId.replaceAll('\\.','/')+'/'+raiz.artefacto_contenido.artefactotId+'/controllers/BaseControllerImpl.java', false, 'UTF-8')]
-package [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/].controllers;
-
-import [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/].entities.BaseEntity;
-import [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/].services.BaseServiceImpl;
+import com.dsdm.pais.entities.BaseEntity;
+import com.dsdm.pais.services.BaseServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -88,5 +82,3 @@ public abstract class BaseControllerImpl<E extends BaseEntity, S extends BaseSer
 
 }
 
-[/file]
-[/template]

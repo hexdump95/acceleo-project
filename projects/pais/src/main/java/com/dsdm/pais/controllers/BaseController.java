@@ -1,13 +1,8 @@
-[comment encoding = UTF-8 /]
-[module generateBaseController('http://www.example.org/diagramaClasesCompleto')]
-
-[template public generateBaseController(raiz : DiagramaClases)]
-[file (raiz.artefacto_contenido.artefactotId+'/src/main/java/'+raiz.artefacto_contenido.grupoId.replaceAll('\\.','/')+'/'+raiz.artefacto_contenido.artefactotId+'/controllers/BaseController.java', false, 'UTF-8')]
-package [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/].controllers;
+package com.dsdm.pais.controllers;
 
 import java.io.Serializable;
 
-import [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/].entities.BaseEntity;
+import com.dsdm.pais.entities.BaseEntity;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -28,5 +23,3 @@ public interface BaseController<E extends BaseEntity, ID extends Serializable> {
     public ResponseEntity<?> delete(@PathVariable ID id);
 }
 
-[/file]
-[/template]

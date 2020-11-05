@@ -1,10 +1,4 @@
-[comment encoding = UTF-8 /]
-[module generateBaseServiceImpl('http://www.example.org/diagramaClasesCompleto')]
-
-
-[template public generateBaseServiceImpl(raiz : DiagramaClases)]
-[file (raiz.artefacto_contenido.artefactotId+'/src/main/java/'+raiz.artefacto_contenido.grupoId.replaceAll('\\.','/')+'/'+raiz.artefacto_contenido.artefactotId+'/services/BaseServiceImpl.java', false, 'UTF-8')]
-package [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/].services;
+package com.dsdm.pais.services;
 
 import java.io.Serializable;
 import java.util.List;
@@ -12,8 +6,8 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/].entities.BaseEntity;
-import [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/].repositories.BaseRepository;
+import com.dsdm.pais.entities.BaseEntity;
+import com.dsdm.pais.repositories.BaseRepository;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -101,5 +95,3 @@ ID extends Serializable> implements BaseService<E, ID> {
 
 }
 
-[/file]
-[/template]

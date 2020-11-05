@@ -1,16 +1,14 @@
 [comment encoding = UTF-8 /]
 [module generateEntityController('http://www.example.org/diagramaClasesCompleto')]
 
+[import org::eclipse::acceleoJavaSpring::queries::general/]
 
-[template public generateEntityController(raiz : DiagramaClases)]
+[template public generateEntityController(c : Clase)]
+[file (artifact(c)+'/src/main/java/'+group(c).replaceAll('\\.','/')+'/'+artifact(c)+'/controllers/'+c.nombre+'Controller.java', false, 'UTF-8')]
+package [group(c)/].[artifact(c)/].controllers;
 
-[for (i: Clase | raiz.packages_contenidos.clasificadores_contenidos->filter(Clase))]
-[if (i.tieneABM=true)]
-[file (raiz.artefacto_contenido.nombre+'/src/main/java/'+raiz.artefacto_contenido.grupoId.replaceAll('\\.','/')+'/'+raiz.artefacto_contenido.artefactotId+'/controllers/'+i.nombre+'Controller.java', false, 'UTF-8')]
-package [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/].controllers;
-
-import [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/].entities.[i.nombre/];
-import [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/].services.[i.nombre/]ServiceImpl;
+import [group(c)/].[artifact(c)/].entities.[c.nombre/];
+import [group(c)/].[artifact(c)/].services.[c.nombre/]ServiceImpl;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,11 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "api/v1/[i.nombre.toLowerCase()/]s")
-public class [i.nombre/]Controller extends BaseControllerImpl<[i.nombre/], [i.nombre/]ServiceImpl> {
+@RequestMapping(path = "api/v1/[c.nombre.toLowerCase()/]s")
+public class [c.nombre/]Controller extends BaseControllerImpl<[c.nombre/], [c.nombre/]ServiceImpl> {
 }
-
 [/file]
-[/if]
-[/for]
 [/template]

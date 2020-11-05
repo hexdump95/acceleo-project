@@ -4,7 +4,7 @@
 
 [template public generateDockerfile(raiz : DiagramaClases)]
 
-[file (raiz.artefacto_contenido.nombre+'/Dockerfile', false, 'UTF-8')]
+[file (raiz.artefacto_contenido.artefactotId+'/Dockerfile', false, 'UTF-8')]
 FROM openjdk:[raiz.configuracionlenguaje.version/]
 COPY ./target/[raiz.artefacto_contenido.artefactotId/]-[raiz.artefacto_contenido.version/].jar /tmp/[raiz.artefacto_contenido.artefactotId/].jar
 WORKDIR /tmp

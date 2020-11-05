@@ -3,7 +3,7 @@
 
 
 [template public generateREADMEmd(raiz : DiagramaClases)]
-[file (raiz.artefacto_contenido.nombre+'/README.md', false, 'UTF-8')]
+[file (raiz.artefacto_contenido.artefactotId+'/README.md', false, 'UTF-8')]
 [for (i: Artefacto | raiz.artefacto_contenido)]
 # [i.nombre/]
 
