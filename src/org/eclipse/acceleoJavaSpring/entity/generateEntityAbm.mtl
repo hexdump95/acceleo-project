@@ -1,0 +1,15 @@
+[comment encoding = UTF-8 /]
+[module generateEntityAbm('http://www.example.org/diagramaClasesCompleto')]
+
+[import org::eclipse::acceleoJavaSpring::entity::generateEntity/]
+[import org::eclipse::acceleoJavaSpring::relation::generateRelation/]
+[import org::eclipse::acceleoJavaSpring::queries::general/]
+
+[template public generateEntityAbm(c : Clase)]
+[file (artifact(c)+'/src/main/java/'+group(c).replaceAll('\\.','/')+'/'+artifact(c)+'/entities/'+c.nombre+'.java', false, 'UTF-8')]
+[generateEntity(c)/]
+[generateRelation(c)/]
+}
+
+[/file]
+[/template]

@@ -3,14 +3,12 @@
 
 [import org::eclipse::acceleoJavaSpring::attributes::generateAttributes/]
 [import org::eclipse::acceleoJavaSpring::relation::generateRelation/]
+[import org::eclipse::acceleoJavaSpring::queries::general/]
 
-[template public generateEntity(raiz : DiagramaClases)]
+[template public generateEntity(c : Clase)]
+package [group(c)/].[artifact(c)/].entities;
 
-[for (i: Clase | raiz.packages_contenidos.clasificadores_contenidos->filter(Clase))]
-[file (raiz.artefacto_contenido.nombre+'/src/main/java/'+raiz.artefacto_contenido.grupoId.replaceAll('\\.','/')+'/'+raiz.artefacto_contenido.artefactotId+'/entities/'+i.nombre+'.java', false, 'UTF-8')]
-package [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/].entities;
-
-[if (i.esAuditable=true)]import org.hibernate.envers.Audited;[/if]
+[if (c.esAuditable=true)]import org.hibernate.envers.Audited;[/if]
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
@@ -34,11 +32,7 @@ import javax.persistence.JoinTable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-[if (i.esAuditable=true)]@Audited[/if]
-public class [i.nombre/] extends BaseEntity {
-[generateAttributes(i)/]
-[generateRelation(i)/]
-}
-[/file]
-[/for]
+[if (c.esAuditable=true)]@Audited[/if]
+public class [c.nombre/] extends BaseEntity {
+[generateAttributes(c)/]
 [/template]

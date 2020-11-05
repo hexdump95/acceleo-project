@@ -1,0 +1,21 @@
+[comment encoding = UTF-8 /]
+[module generateAbm('http://www.example.org/diagramaClasesCompleto')]
+
+[import org::eclipse::acceleoJavaSpring::controller::generateEntityController/]
+[import org::eclipse::acceleoJavaSpring::entity::generateEntityAbm/]
+[import org::eclipse::acceleoJavaSpring::service::generateEntityService/]
+[import org::eclipse::acceleoJavaSpring::service::generateEntityServiceImpl/]
+[import org::eclipse::acceleoJavaSpring::repository::generateEntityRepository/]
+
+[template public generateAbm(raiz : DiagramaClases)]
+
+[for (i: Clase | raiz.packages_contenidos.clasificadores_contenidos->filter(Clase))]
+[if (i.tieneABM=true)]
+[generateEntityAbm(i)/]
+[generateEntityController(i)/]
+[generateEntityService(i)/]
+[generateEntityServiceImpl(i)/]
+[generateEntityRepository(i)/]
+[/if]
+[/for]
+[/template]

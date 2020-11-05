@@ -3,7 +3,7 @@
 
 
 [template public generateGitIgnore(raiz : DiagramaClases)]
-[file (raiz.artefacto_contenido.nombre+'/.gitignore', false, 'UTF-8')]
+[file (raiz.artefacto_contenido.artefactotId+'/.gitignore', false, 'UTF-8')]
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar

@@ -2,7 +2,7 @@
 [module generateBaseController('http://www.example.org/diagramaClasesCompleto')]
 
 [template public generateBaseController(raiz : DiagramaClases)]
-[file (raiz.artefacto_contenido.nombre+'/src/main/java/'+raiz.artefacto_contenido.grupoId.replaceAll('\\.','/')+'/'+raiz.artefacto_contenido.artefactotId+'/controllers/BaseController.java', false, 'UTF-8')]
+[file (raiz.artefacto_contenido.artefactotId+'/src/main/java/'+raiz.artefacto_contenido.grupoId.replaceAll('\\.','/')+'/'+raiz.artefacto_contenido.artefactotId+'/controllers/BaseController.java', false, 'UTF-8')]
 package [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/].controllers;
 
 import java.io.Serializable;

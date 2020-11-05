@@ -3,7 +3,7 @@
 
 
 [template public generateBaseControllerImpl(raiz : DiagramaClases)]
-[file (raiz.artefacto_contenido.nombre+'/src/main/java/'+raiz.artefacto_contenido.grupoId.replaceAll('\\.','/')+'/'+raiz.artefacto_contenido.artefactotId+'/controllers/BaseControllerImpl.java', false, 'UTF-8')]
+[file (raiz.artefacto_contenido.artefactotId+'/src/main/java/'+raiz.artefacto_contenido.grupoId.replaceAll('\\.','/')+'/'+raiz.artefacto_contenido.artefactotId+'/controllers/BaseControllerImpl.java', false, 'UTF-8')]
 package [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/].controllers;
 
 import [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/].entities.BaseEntity;
@@ -59,7 +59,7 @@ public abstract class BaseControllerImpl<E extends BaseEntity, S extends BaseSer
     @PostMapping("/")
     public ResponseEntity<?> save(@RequestBody E entity) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(servicio.save(entity));
+            return ResponseEntity.status(HttpStatus.CREATED).body(servicio.save(entity));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("{\"error\": \"Error, por favor intente más tarde.\" }");

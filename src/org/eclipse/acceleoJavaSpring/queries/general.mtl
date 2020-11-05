@@ -1,6 +1,15 @@
 [comment encoding = UTF-8 /]
 [module general('http://www.example.org/diagramaClasesCompleto')]
 
+[query public nombreP(c : Clase) : String = c.eContainer(DiagramaClases).artefacto_contenido.nombre /]
+[query public artifact(c : Clase) : String = c.eContainer(DiagramaClases).artefacto_contenido.artefactotId /]
+[query public group(c : Clase) : String = c.eContainer(DiagramaClases).artefacto_contenido.grupoId /]
+
+[query public nombrePDestino(r : Relacion) : String = r.destino.oclAsType(Clase).eContainer(DiagramaClases).artefacto_contenido.nombre /]
+[query public artifactDestino(r : Relacion) : String = r.destino.oclAsType(Clase).eContainer(DiagramaClases).artefacto_contenido.artefactotId /]
+[query public groupDestino(r : Relacion) : String = r.destino.oclAsType(Clase).eContainer(DiagramaClases).artefacto_contenido.grupoId /]
+[query public elDestino(r : Relacion) : Clase = r.destino.oclAsType(Clase) /]
+
 [comment devuelve un set con todas las clases del diagrama /]
 [query public clases(dc : DiagramaClases) : Set(Clase) = dc.packages_contenidos.clasificadores_contenidos->filter(Clase)/]
 
@@ -11,13 +20,13 @@
 [query public interfaces(dc : DiagramaClases) : Set(Interface) = dc.packages_contenidos.clasificadores_contenidos->filter(Interface)/]
 
 [comment devuelve true si el clasificador hereda de otro  /]
-[query public esHijo(c : Clasificador) : Boolean = not c.herencias_contenidas.oclIsUndefined()/]
+[comment query public esHijo(c : Clasificador) : Boolean = not c.herencias_contenidas.oclIsUndefined()/]
 
 [comment devuelve el padre del clasificador /]
 [query public padreHerencia(c : Clase) : Clase = c.herencias_contenidas.destino.oclAsType(Clase)/]
 
 [comment devuelve true si es padre aunque sea de un clasificador /]
-[query public esPadre(c : Clasificador) : Boolean = 
+[comment query public esPadre(c : Clasificador) : Boolean = 
 	not c.eContainer(DiagramaClases).packages_contenidos.clasificadores_contenidos->forAll
 		(clasificador : Clasificador |  (not (clasificador.herencias_contenidas.destino_herencia.nombre.toString() = c.nombre.toString())))
  /]
