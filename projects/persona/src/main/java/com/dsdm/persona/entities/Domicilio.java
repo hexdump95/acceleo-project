@@ -27,10 +27,10 @@ import javax.persistence.JoinTable;
 
 public class Domicilio extends BaseEntity {
 
-    @Column(name = "", unique = true)
+    @Column(name = "calle", unique = true)
     private String calle;
 
-    @Column(name = "", unique = true)
+    @Column(name = "numero", unique = true)
     private int numero;
 
 

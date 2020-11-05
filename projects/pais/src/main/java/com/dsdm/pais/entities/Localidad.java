@@ -27,7 +27,7 @@ import javax.persistence.JoinTable;
 
 public class Localidad extends BaseEntity {
 
-    @Column(name = "", unique = true)
+    @Column(name = "numero", unique = true)
     private int numero;
 
 

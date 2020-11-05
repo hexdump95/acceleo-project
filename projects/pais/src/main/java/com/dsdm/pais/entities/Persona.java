@@ -27,7 +27,7 @@ import javax.persistence.JoinTable;
 
 public class Persona extends BaseEntity {
 
-    @Column(name = "", unique = true)
+    @Column(name = "numero", unique = true)
     private int numero;
 
 
