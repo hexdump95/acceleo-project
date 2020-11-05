@@ -18,8 +18,6 @@
 
 [import org::eclipse::acceleoJavaSpring::docker::generateDockerfile/]
 
-[import org::eclipse::acceleoJavaSpring::docker::generateDockerfile/]
-
 [template public generateMain(raiz : DiagramaClases)]
 [comment @main/]
 [generatePOM(raiz)/]
@@ -38,9 +36,6 @@
 [generateAbm(raiz)/]
 
 [generateDockerfile(raiz)/]
-
-[generateDockerfile(raiz)/]
-
 
 [/template]
 
