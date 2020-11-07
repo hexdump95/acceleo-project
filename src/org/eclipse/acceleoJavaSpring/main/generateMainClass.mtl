@@ -4,7 +4,6 @@
 
 [template public generateMainClass(raiz : DiagramaClases)]
 [file (raiz.artefacto_contenido.artefactotId+'/src/main/java/'+raiz.artefacto_contenido.grupoId.replaceAll('\\.','/')+'/'+raiz.artefacto_contenido.artefactotId+'/'+(raiz.artefacto_contenido.nombre)+'Application.java', false, 'UTF-8')]
-
 package [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/];
 
 import org.springframework.boot.SpringApplication;
