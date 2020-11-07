@@ -13,6 +13,7 @@
 [import org::eclipse::acceleoJavaSpring::base::generateBaseServiceImpl/]
 [import org::eclipse::acceleoJavaSpring::base::generateBaseRepository/]
 [import org::eclipse::acceleoJavaSpring::config::generateAppProperties/]
+[import org::eclipse::acceleoJavaSpring::swagger::generateSwagger/]
 
 [import org::eclipse::acceleoJavaSpring::abm::generateAbm/]
 
@@ -36,6 +37,8 @@
 [generateAbm(raiz)/]
 
 [generateDockerfile(raiz)/]
+
+[generateSwagger(raiz)/]
 
 [/template]
 
