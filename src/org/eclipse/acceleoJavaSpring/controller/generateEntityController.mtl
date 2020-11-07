@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "api/v1/[c.nombre.toLowerCase()/]s")
+@RequestMapping(path = "api/v1/[if(c.nombre.last(1).matches('[aeiou]'))][c.nombre.toLowerCase()/]s[else][c.nombre.toLowerCase()/]es[/if]")
 public class [c.nombre/]Controller extends BaseControllerImpl<[c.nombre/], [c.nombre/]ServiceImpl> {
 }
 [/file]
