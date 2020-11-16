@@ -1,0 +1,34 @@
+[comment encoding = UTF-8 /]
+[module generateDockerCompose('http://www.example.org/diagramaClasesCompleto')]
+
+
+[template public generateDockerCompose(raiz : DiagramaClases)]
+
+[file (raiz.artefacto_contenido.artefactotId+'/docker-compose.yaml', false, 'UTF-8')]
+version: "3"
+
+services:
+  mysqldb:
+    image: mysql/mysql-server:8.0
+    container_name: mysqldb
+    environment:
+      - MYSQL_DATABASE=[raiz.configuraciondb.dbNombre/]
+      - MYSQL_USER=[raiz.configuraciondb.dbUsuario/]
+      - MYSQL_PASSWORD=[raiz.configuraciondb.dbContrasena/]
+      - MYSQL_ROOT_PASSWORD=[raiz.configuraciondb.dbContrasena/]
+      - MYSQL_ROOT_HOST:
+    expose:
+      - [raiz.configuraciondb.dbPuerto/]
+
+  [raiz.artefacto_contenido.artefactotId/]:
+    restart: on-failure
+    container_name: [raiz.artefacto_contenido.artefactotId/]-container
+    build: .
+    environment:
+      WAIT_HOSTS: mysqldb:[raiz.configuraciondb.dbPuerto/]
+    depends_on:
+      - mysqldb
+    ports:
+      - [raiz.configuraciondb.serverPuerto/]:[raiz.configuraciondb.serverPuerto/]
+[/file]
+[/template]
