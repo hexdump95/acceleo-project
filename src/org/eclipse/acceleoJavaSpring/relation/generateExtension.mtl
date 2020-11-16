@@ -1,0 +1,8 @@
+[comment encoding = UTF-8 /]
+[module generateExtension('http://www.example.org/diagramaClasesCompleto')]
+
+[import org::eclipse::acceleoJavaSpring::entity::generateEntityAbm/]
+
+[template public generateExtension(c : Clase)]
+extends [if (c.herencias_contenidas->size()>0)][for(h: Clase | c.herencias_contenidas.destino->filter(Clase))][h.nombre/][generateEntityAbm(h)/][/for][else]BaseEntity[/if]
+[/template]

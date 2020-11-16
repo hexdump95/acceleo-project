@@ -18,6 +18,7 @@
 [import org::eclipse::acceleoJavaSpring::abm::generateAbm/]
 
 [import org::eclipse::acceleoJavaSpring::docker::generateDockerfile/]
+[import org::eclipse::acceleoJavaSpring::docker::generateDockerCompose/]
 
 [template public generateMain(raiz : DiagramaClases)]
 [comment @main/]
@@ -37,6 +38,7 @@
 [generateAbm(raiz)/]
 
 [generateDockerfile(raiz)/]
+[generateDockerCompose(raiz)/]
 
 [generateSwagger(raiz)/]
 

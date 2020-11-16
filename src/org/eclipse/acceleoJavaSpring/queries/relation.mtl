@@ -36,6 +36,6 @@ r.visibilidad+' List<'+dtoUF(c)+'> '+entityLF(c)+'s = new ArrayList<>();'/]
 [comment [query public ITieneRelaciones(dc: DiagramaClases, i : Interface) : Boolean = 
 	clases(dc)->forAll(c : Clase | c.relaciones_contenidas.owned.toString() = i.nombre.toString()) /]
 
-[query public ownedEsClase(r : Relacion) : Boolean = r.owned.oclIsTypeOf(Clase) /]
+[query public ownedEsClase(r : Relacion) : Boolean = r.destino.oclIsTypeOf(Clase) /]
 
-[query public ownedEsInterface(r : Relacion) : Boolean = r.owned.oclIsTypeOf(Interface) /]
+[query public ownedEsInterface(r : Relacion) : Boolean = r.destino.oclIsTypeOf(Interface) /]

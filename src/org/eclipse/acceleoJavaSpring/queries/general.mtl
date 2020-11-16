@@ -5,6 +5,10 @@
 [query public artifact(c : Clase) : String = c.eContainer(DiagramaClases).artefacto_contenido.artefactotId /]
 [query public group(c : Clase) : String = c.eContainer(DiagramaClases).artefacto_contenido.grupoId /]
 
+[query public nombreP(c : Interface) : String = c.eContainer(DiagramaClases).artefacto_contenido.nombre /]
+[query public artifact(c : Interface) : String = c.eContainer(DiagramaClases).artefacto_contenido.artefactotId /]
+[query public group(c : Interface) : String = c.eContainer(DiagramaClases).artefacto_contenido.grupoId /]
+
 [query public nombrePDestino(r : Relacion) : String = r.destino.oclAsType(Clase).eContainer(DiagramaClases).artefacto_contenido.nombre /]
 [query public artifactDestino(r : Relacion) : String = r.destino.oclAsType(Clase).eContainer(DiagramaClases).artefacto_contenido.artefactotId /]
 [query public groupDestino(r : Relacion) : String = r.destino.oclAsType(Clase).eContainer(DiagramaClases).artefacto_contenido.grupoId /]
@@ -47,3 +51,7 @@
 [query public abstractOAbsMeth(c : Clase) : Boolean = c.esAbstracta or metodosAbstractos(c) /]
 
 [query public castClase(c : Clasificador) : Clase = c.oclAsType(Clase) /]
+
+
+
+

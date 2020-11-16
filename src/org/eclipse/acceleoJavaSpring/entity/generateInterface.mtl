@@ -1,0 +1,23 @@
+[comment encoding = UTF-8 /]
+[module generateInterface('http://www.example.org/diagramaClasesCompleto')]
+
+[import org::eclipse::acceleoJavaSpring::entity::generateEntity/]
+[import org::eclipse::acceleoJavaSpring::relation::generateRelation/]
+[import org::eclipse::acceleoJavaSpring::queries::general/]
+
+[template public generateInterface(c : Interface)]
+[file (artifact(c)+'/src/main/java/'+group(c).replaceAll('\\.','/')+'/'+artifact(c)+'/entities/'+c.nombre+'.java', false, 'UTF-8')]
+package [group(c)/].[artifact(c)/].entities;
+
+public interface [c.nombre/] {
+[for (i : Atributo | c.atributos_contenidos)]
+    public static final [i.tipo/] [i.nombre/] = [i.valorInicial/];
+[/for]
+
+[for (i : Operacion | c.operaciones_contenidas)]
+    public static final [i.tipoRetorno/] [i.nombre/]();
+[/for]
+
+}
+[/file]
+[/template]
