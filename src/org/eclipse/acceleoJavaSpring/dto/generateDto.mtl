@@ -1,0 +1,57 @@
+[comment encoding = UTF-8 /]
+[module generateDto('http://www.example.org/diagramaClasesCompleto')]
+
+[import org::eclipse::acceleoJavaSpring::entity::generateEntity/]
+[import org::eclipse::acceleoJavaSpring::relation::generateRelation/]
+[import org::eclipse::acceleoJavaSpring::queries::general/]
+
+[template public generateDto(c : Clase)]
+[file (artifact(c)+'/src/main/java/'+group(c).replaceAll('\\.','/')+'/'+artifact(c)+'/dto/'+c.nombre+'DTO.java', false, 'UTF-8')]
+package [group(c)/].[artifact(c)/].entities;
+
+[if(c.relaciones_contenidas->exists(multiplicidad= Multiplicidad::oneToMany)) or (c.relaciones_contenidas->exists(multiplicidad= Multiplicidad::manyToMany))]import java.util.ArrayList;
+import java.util.List;[/if]
+
+import java.util.Date;
+
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.validation.constraints.NotNull;
+
+@Getter
+@Setter
+public class [c.nombre/]DTO[if (c.herencias_contenidas->size()>0)][for(h: Clase | c.herencias_contenidas.destino->filter(Clase))] extends [h.nombre/][/for][/if] {
+
+    [for (i : Atributo | c.atributos_contenidos)][if (i.isInDto)]
+    [if not(i.nullable)]@NotNull[/if]
+    [i.visibilidad/] [i.tipo/] [i.nombre/];
+	[/if]
+
+	[/for]
+[for (r: Relacion | c.relaciones_contenidas)]
+[comment if(r.destino.oclAsType(Clase).tieneABM=false)/]
+[if (r.tipo.toString() = 'unidireccional')]
+	[if (r.multiplicidad.toString() = 'oneToOne')]
+    [r.visibilidad/] [r.destino.nombre/]DTO [r.nombre/]DTO;
+	[/if]
+	[if (r.multiplicidad.toString() = 'oneToMany')]
+    [r.visibilidad/] List<[r.destino.nombre/]DTO> [r.nombre/]DTO = new ArrayList<[r.destino.nombre/]DTO>();
+	[/if]
+    [if (r.multiplicidad.toString() = 'manyToOne')]
+    [r.visibilidad/] [r.destino.nombre/]DTO [r.nombre/]DTO;
+	[/if]
+	[if (r.multiplicidad.toString() = 'manyToMany')]
+    [r.visibilidad/] List<[r.destino.nombre/]DTO> [r.nombre/]DTO;
+	[/if]
+[/if]
+[if (r.tipo.toString() = 'composicion')]
+    [r.visibilidad/] List<[r.destino.nombre/]DTO> [r.nombre/]DTO = new ArrayList<[r.destino.nombre/]DTO>();
+[/if]
+
+[comment /if/]
+[/for]
+}
+
+[/file]
+[/template]
