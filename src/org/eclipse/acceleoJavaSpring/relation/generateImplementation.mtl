@@ -1,0 +1,8 @@
+[comment encoding = UTF-8 /]
+[module generateImplementation('http://www.example.org/diagramaClasesCompleto')]
+
+[import org::eclipse::acceleoJavaSpring::entity::generateInterface/]
+
+[template public generateImplementation(c : Clase)]
+[if(c.realizaciones_contenidas->size()>0)]implements [for (r : Realizacion | c.realizaciones_contenidas)separator(', ')][r.destino.nombre/][generateInterface(r.destino)/][/for][/if]
+[/template]
