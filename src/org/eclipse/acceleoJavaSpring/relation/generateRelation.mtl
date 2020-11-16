@@ -8,7 +8,7 @@
 [template public generateRelation(c : Clase)]
 [for (i: Relacion | c.relaciones_contenidas)]
 
-[if(i.destino.oclAsType(Clase).tieneABM=false)]
+[if (i.destino.oclAsType(Clase).tieneABM=false)]
 [file (artifactDestino(i)+'/src/main/java/'+groupDestino(i).replaceAll('\\.','/')+'/'+artifactDestino(i)+'/entities/'+elDestino(i).nombre+'.java', false, 'UTF-8')]
 [generateEntity(elDestino(i))/]
 [generateRelationSimple(elDestino(i))/]

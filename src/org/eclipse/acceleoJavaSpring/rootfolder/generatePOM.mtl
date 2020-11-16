@@ -11,7 +11,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.3.3.RELEASE</version>
+		<version>2.4.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>[raiz.artefacto_contenido.grupoId/]</groupId>
@@ -69,11 +69,22 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-      	  <groupId>io.springfox</groupId>
-    	    <artifactId>springfox-boot-starter</artifactId>
-    	    <version>3.0.0</version>
-   		</dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-boot-starter</artifactId>
+		    <version>3.0.0</version>
+		</dependency>
+		<dependency>
+		    <groupId>javax.validation</groupId>
+		    <artifactId>validation-api</artifactId>
+		    <version>2.0.1.Final</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.modelmapper</groupId>
+		    <artifactId>modelmapper</artifactId>
+		    <version>2.3.8</version>
+		</dependency>
 	</dependencies>
+
 
 	<build>
 		<plugins>

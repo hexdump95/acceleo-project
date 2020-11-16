@@ -1,5 +1,5 @@
 [comment encoding = UTF-8 /]
-[module generateBaseControllerImpl('http://www.example.org/proyectoDiagramaClases', 'http://www.example.org/diagramaClasesCompleto')]
+[module generateBaseControllerImpl('http://www.example.org/diagramaClasesCompleto')]
 
 
 [template public generateBaseControllerImpl(raiz : DiagramaClases)]
@@ -24,7 +24,7 @@ public abstract class BaseControllerImpl<E extends BaseEntity, S extends BaseSer
         implements BaseController<E, Long> {
 
     @Autowired
-    protected S servicio;
+    protected S servicio; 
 
     @GetMapping("/")
     public ResponseEntity<?> getAll() {

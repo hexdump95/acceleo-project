@@ -3,36 +3,44 @@
 
 [import org::eclipse::acceleoJavaSpring::attributes::generateAttributes/]
 [import org::eclipse::acceleoJavaSpring::relation::generateRelation/]
+[import org::eclipse::acceleoJavaSpring::relation::generateExtension/]
+[import org::eclipse::acceleoJavaSpring::relation::generateImplementation/]
 [import org::eclipse::acceleoJavaSpring::queries::general/]
 
 [template public generateEntity(c : Clase)]
 package [group(c)/].[artifact(c)/].entities;
-
-[if (c.esAuditable=true)]import org.hibernate.envers.Audited;[/if]
+[if (c.esAuditable)]['\nimport org.hibernate.envers.Audited;\n'/][/if]
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
-import java.util.ArrayList;
-import java.util.List;
+[if(c.relaciones_contenidas->exists(multiplicidad= Multiplicidad::oneToMany)) or (c.relaciones_contenidas->exists(multiplicidad= Multiplicidad::manyToMany))]import java.util.ArrayList;
+import java.util.List;[/if]
+
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Data;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.ManyToMany;
+[if(c.relaciones_contenidas->size()>0)]
+[if(c.relaciones_contenidas->exists(multiplicidad = Multiplicidad::oneToOne))]
 import javax.persistence.OneToOne;
+[/if][if(c.relaciones_contenidas->exists(multiplicidad = Multiplicidad::manyToOne))]
+import javax.persistence.ManyToOne;
+[/if][if(c.relaciones_contenidas->exists(multiplicidad = Multiplicidad::oneToMany))]
+import javax.persistence.OneToMany;
+[/if][if(c.relaciones_contenidas->exists(multiplicidad = Multiplicidad::manyToMany))]
+import javax.persistence.ManyToMany;[/if]
+import javax.persistence.JoinColumn;
 import javax.persistence.CascadeType;
 import javax.persistence.JoinTable;
+[/if]
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 [if (c.esAuditable=true)]@Audited[/if]
-public class [c.nombre/] extends BaseEntity {
+public [if(c.esAbstracta)]abstract [/if]class [c.nombre/] [generateExtension(c)/] [generateImplementation(c)/] {
 [generateAttributes(c)/]
 [/template]

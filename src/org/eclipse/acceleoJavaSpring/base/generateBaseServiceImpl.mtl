@@ -15,11 +15,15 @@ import javax.transaction.Transactional;
 import [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/].entities.BaseEntity;
 import [raiz.artefacto_contenido.grupoId/].[raiz.artefacto_contenido.artefactotId/].repositories.BaseRepository;
 
+//import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public abstract class BaseServiceImpl<E extends BaseEntity, 
 ID extends Serializable> implements BaseService<E, ID> {
+
+    //@Autowired
+    //private ModelMapper modelMapper;
 
     protected BaseRepository<E, ID> baseRepository;
 
